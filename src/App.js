@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+import './App.scss';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      lat: null
+    };
+
+  window.navigator.geolocation.getCurrentPosition(
+    position => {
+      this.setState({ lat: position.coords.latitude});
+    }, 
+
+    err => console.log(err)
+  )
+
+  }
+
+
+  render ()  {
+   return <div className="App">
+
+      <h1>Hello {this.state.lat}</h1>
+
+    </div>;
+  }
 }
 
 export default App;
